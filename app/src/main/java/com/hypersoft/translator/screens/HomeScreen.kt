@@ -334,7 +334,11 @@ fun HomeScreen(
                                     )
                                 }
                                 IconButton(onClick = {
-                                    clipboardManager.setText(AnnotatedString((text)))
+                                    if (textTranslated.isNotEmpty()) {
+                                        clipboardManager.setText(AnnotatedString((text)))
+                                    } else {
+                                        context.toasty("translate something then copy")
+                                    }
                                 }) {
                                     Icon(
                                         imageVector = Icons.Default.FileCopy,
