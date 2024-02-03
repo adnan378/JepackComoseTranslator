@@ -9,22 +9,20 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
-import androidx.core.content.ContextCompat.getSystemService
 import com.hypersoft.translator.R
 import com.hypersoft.translator.data.DrawerMenu
 import com.hypersoft.translator.enums.MainRoute
-
 
 val menus = arrayOf(
     DrawerMenu(Icons.Filled.Face, "Articles", MainRoute.Articles.name),
     DrawerMenu(Icons.Filled.Settings, "Settings", MainRoute.Settings.name),
     DrawerMenu(Icons.Filled.Info, "About Us", MainRoute.About.name)
 )
- fun Context.isNetworkConnected(): Boolean {
+
+fun Context.isNetworkConnected(): Boolean {
     val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
     return cm!!.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
 }
-
 
 fun Context?.shareText(text: String) {
     this?.let {
@@ -37,7 +35,8 @@ fun Context?.shareText(text: String) {
             )
             sendIntent.type = "text/plain"
             it.startActivity(sendIntent)
-        } catch (_: Exception) {}
+        } catch (_: Exception) {
+        }
     }
 }
 
@@ -81,7 +80,8 @@ fun Activity?.shareApp() {
             )
             sendIntent.type = "text/plain"
             it.startActivity(sendIntent)
-        } catch (_: Exception) {}
+        } catch (_: Exception) {
+        }
     }
 }
 

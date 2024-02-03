@@ -100,7 +100,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
     /* permission handling in compose */
     implementation("com.google.accompanist:accompanist-permissions:0.24.11-rc")
-     /* Room Local DB */
+    /* Room Local DB */
     val roomVersion = "2.6.1"
     implementation("androidx.room:room-ktx:$roomVersion")
     implementation("androidx.room:room-runtime:$roomVersion")
@@ -109,4 +109,6 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    /* lottie animation */
+//    implementation("com.airbnb.android:lottie-compose:4.0.0")
 }

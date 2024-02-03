@@ -93,7 +93,7 @@ fun ScaffoldPattern(openDrawer: () -> Unit) {
         val openDialog = remember { mutableStateOf(false) }
         HandleBackPress {
             if (navController.currentDestination?.route == Screens.Home.route) {
-                mContext.toasty("show exit dialog")
+//                mContext.toasty("show exit dialog")
                 openDialog.value = true
             } else {
                 navController.popBackStack()

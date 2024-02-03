@@ -36,7 +36,7 @@ fun ExitDialog(
                     onConfirmation()
                 }
             ) {
-                Text("Confirm")
+                Text("Exit")
             }
         },
         dismissButton = {
@@ -45,7 +45,7 @@ fun ExitDialog(
                     onDismissRequest()
                 }
             ) {
-                Text("Dismiss")
+                Text("No")
             }
         }
     )

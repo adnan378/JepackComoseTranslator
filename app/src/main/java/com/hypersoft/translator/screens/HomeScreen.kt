@@ -236,10 +236,12 @@ fun HomeScreen(
 
                                 Spacer(modifier = Modifier.weight(1f))
                                 Button(onClick = {
+
                                     if (!context.isNetworkConnected()) {
                                         context.toasty("network not connected")
                                         return@Button
                                     }
+
                                     if (text.isNotEmpty()) {
                                         showProgressBar.value = true
                                         keyboardController?.hide()
@@ -337,7 +339,7 @@ fun HomeScreen(
                                     if (textTranslated.isNotEmpty()) {
                                         clipboardManager.setText(AnnotatedString((text)))
                                     } else {
-                                        context.toasty("translate something then copy")
+                                        context.toasty("first translate something")
                                     }
                                 }) {
                                     Icon(

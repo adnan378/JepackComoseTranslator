@@ -57,7 +57,7 @@ fun SearchScreen(
                     )
                 }
             } else {
-                context.toasty("no data found")
+                context.toasty("data not found")
             }
         }
     }
@@ -82,10 +82,12 @@ fun HistoryList(
     ) {
         Column(modifier = Modifier.padding(10.dp)) {
             Row {
+
                 Image(
                     painter = painterResource(id = R.drawable.icon_language),
                     contentDescription = "first language",
                 )
+
                 Text(
                     text = firstLang,
                     modifier = Modifier
