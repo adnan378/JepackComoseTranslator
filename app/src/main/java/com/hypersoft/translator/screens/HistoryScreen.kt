@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -20,8 +19,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -35,7 +32,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.hypersoft.translator.R
 import com.hypersoft.translator.database.TranslationHistory
 import com.hypersoft.translator.extentions.toasty
-import com.hypersoft.translator.ui.theme.TranslatorTheme
 import com.hypersoft.translator.viewmodels.DatabaseViewModel
 
 @Composable
@@ -44,32 +40,24 @@ fun SearchScreen(
     historyViewModel: DatabaseViewModel = hiltViewModel()
 ) {
     val historyList by historyViewModel.readAllData.observeAsState()
-    TranslatorTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            LazyColumn(
-                modifier = Modifier.fillMaxWidth(),
-                contentPadding = PaddingValues(16.dp)
-            ) {
-
-                historyList?.let {
-                    if (it.isNotEmpty()) {
-                        items(it) { historyItem ->
-                            HistoryList(
-                                historyViewModel,
-                                historyItem,
-                                historyItem.firstLanguage,
-                                historyItem.secondLanguage,
-                                historyItem.firstText,
-                                historyItem.secondText
-                            )
-                        }
-                    } else {
-                        context.toasty("no data found")
-                    }
+    LazyColumn(
+        modifier = Modifier.fillMaxWidth(),
+        contentPadding = PaddingValues(16.dp)
+    ) {
+        historyList?.let {
+            if (it.isNotEmpty()) {
+                items(it) { historyItem ->
+                    HistoryList(
+                        historyViewModel,
+                        historyItem,
+                        historyItem.firstLanguage,
+                        historyItem.secondLanguage,
+                        historyItem.firstText,
+                        historyItem.secondText
+                    )
                 }
+            } else {
+                context.toasty("no data found")
             }
         }
     }
@@ -123,13 +111,11 @@ fun HistoryList(
                 modifier = Modifier
                     .padding(vertical = 8.dp)
             )
-
             Divider(
                 color = Color.Blue, thickness = 1.dp,
                 modifier = Modifier
                     .padding(vertical = 8.dp)
             )
-
             Row {
                 Icon(imageVector = Icons.Default.GTranslate, contentDescription = "second icon")
                 Text(

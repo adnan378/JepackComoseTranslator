@@ -15,6 +15,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object HiltModule {
+
     @Singleton
     @Provides
     fun getRepository(dao: TranslationDao): TranslationRepository {

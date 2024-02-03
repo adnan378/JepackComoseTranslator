@@ -63,6 +63,7 @@ import com.hypersoft.translator.extentions.startTranslation
 import com.hypersoft.translator.extentions.toasty
 import com.hypersoft.translator.speechrecognizer.SpeechRecognizerContract
 import com.hypersoft.translator.ui.theme.TranslatorTheme
+import com.hypersoft.translator.utils.isNetworkConnected
 import com.hypersoft.translator.utils.shareText
 import com.hypersoft.translator.viewmodels.DatabaseViewModel
 import com.hypersoft.translator.viewmodels.MainViewModel
@@ -235,6 +236,10 @@ fun HomeScreen(
 
                                 Spacer(modifier = Modifier.weight(1f))
                                 Button(onClick = {
+                                    if (!context.isNetworkConnected()) {
+                                        context.toasty("network not connected")
+                                        return@Button
+                                    }
                                     if (text.isNotEmpty()) {
                                         showProgressBar.value = true
                                         keyboardController?.hide()

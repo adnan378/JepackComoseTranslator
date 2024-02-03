@@ -16,11 +16,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.hypersoft.translator.MainActivity
-import com.hypersoft.translator.scaffold_pattern.data.BottomNavigationItem
 import com.hypersoft.translator.data.sealed.Screens
 import com.hypersoft.translator.dialogues.ExitDialog
 import com.hypersoft.translator.extentions.HandleBackPress
 import com.hypersoft.translator.extentions.toasty
+import com.hypersoft.translator.scaffold_pattern.data.BottomNavigationItem
 import com.hypersoft.translator.screens.HomeScreen
 import com.hypersoft.translator.screens.ProfileScreen
 import com.hypersoft.translator.screens.SearchScreen
@@ -90,9 +90,7 @@ fun ScaffoldPattern(openDrawer: () -> Unit) {
             }
         }
     ) { paddingValues ->
-
         val openDialog = remember { mutableStateOf(false) }
-
         HandleBackPress {
             if (navController.currentDestination?.route == Screens.Home.route) {
                 mContext.toasty("show exit dialog")
@@ -101,7 +99,6 @@ fun ScaffoldPattern(openDrawer: () -> Unit) {
                 navController.popBackStack()
             }
         }
-
         if (openDialog.value) {
             ExitDialog(
                 onDismissRequest = {
@@ -112,7 +109,6 @@ fun ScaffoldPattern(openDrawer: () -> Unit) {
                     (mContext as MainActivity).finishAffinity()
                 })
         }
-
         NavHost(
             navController = navController,
             startDestination = Screens.Home.route,
@@ -131,12 +127,8 @@ fun ScaffoldPattern(openDrawer: () -> Unit) {
     }
 }
 
-
 @Composable
 fun AlertDialogSample(openDialog: Boolean, showDialog: (Boolean) -> Unit) {
-//    MaterialTheme {
-//        Column {
-
     if (openDialog) {
         AlertDialog(
             onDismissRequest = {
@@ -167,7 +159,4 @@ fun AlertDialogSample(openDialog: Boolean, showDialog: (Boolean) -> Unit) {
             }
         )
     }
-//        }
-
-//    }
 }

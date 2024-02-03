@@ -23,20 +23,13 @@ data class TranslationHistory(
     @ColumnInfo(name = "second_text")
     val secondText: String
 )
-
 @Dao
 interface TranslationDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend  fun insertTranslation(history: TranslationHistory)
-
     @Delete
     suspend fun delete(translation: TranslationHistory)
-
     @Query("SELECT * from translationhistory")
     fun getAllTranslation(): LiveData<List<TranslationHistory>>
-
-    /*@Query("SELECT * FROM TranslationHistory WHERE first_language = :name")
-    fun findProduct(name: String): List<TranslationHistory>*/
 
 }
