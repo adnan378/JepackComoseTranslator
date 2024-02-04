@@ -87,15 +87,12 @@ fun HistoryList(
                     painter = painterResource(id = R.drawable.icon_language),
                     contentDescription = "first language",
                 )
-
                 Text(
                     text = firstLang,
                     modifier = Modifier
                         .padding(horizontal = 8.dp)
                 )
-
                 Spacer(modifier = Modifier.weight(1f))
-
                 IconButton(
                     onClick = {
                         historyViewModel.deleteHistory(historyItem)

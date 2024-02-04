@@ -142,7 +142,6 @@ fun AlertDialogSample(openDialog: Boolean, showDialog: (Boolean) -> Unit) {
             },
             confirmButton = {
                 Button(
-
                     onClick = {
                         showDialog.invoke(false)
                     }) {

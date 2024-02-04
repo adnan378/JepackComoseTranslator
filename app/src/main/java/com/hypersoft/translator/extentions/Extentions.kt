@@ -34,24 +34,14 @@ fun Context.toasty(message: String){
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
-fun Context.startTranslation(text: String, toLanguage: String, resultText: (String) -> Unit){
+fun Context.startTranslation(text: String, toLanguage: String, resultText: (String?) -> Unit){
 
     val handler = CoroutineExceptionHandler { _, exception ->
         Log.e("Translator_Tag", "$exception")
+        resultText.invoke(null)
     }
 
     CoroutineScope(Dispatchers.IO+handler).launch {
-        /*
-        Jsoup is an open source Java library used mainly for extracting data from HTML.
-         It also allows you to manipulate and output HTML.It provides a very convenient API
-         for extracting and manipulating data, using the best of DOM, CSS, and jquery-like methods.
-
-         How do you use kotlin jsoup?
-         Using jsoup with Kotlin to parse HTML
-         Fetch HTML response from a URL.
-         Parse it and scrape information from it.
-         Dump it somewhere.
-         */
         val doc = Jsoup.connect(
             "https://translate.google.com/m?hl=en" +
                     "&sl=auto" +
@@ -67,7 +57,7 @@ fun Context.startTranslation(text: String, toLanguage: String, resultText: (Stri
                 textIs = element[0].text()
                 resultText.invoke(textIs)
             }else{
-                toasty("response is null")
+                resultText.invoke(null)
             }
         }
     }

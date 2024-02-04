@@ -251,15 +251,18 @@ fun HomeScreen(
                                             secondLanguage.langCode
                                         ) { resultText ->
                                             showProgressBar.value = false
-                                            textTranslated = resultText
-
-                                            insertDataToDatabase(
-                                                historyViewModel,
-                                                "Auto",
-                                                secondLanguage.title,
-                                                text,
-                                                textTranslated
-                                            )
+                                            resultText?.let {
+                                                textTranslated = resultText
+                                                insertDataToDatabase(
+                                                    historyViewModel,
+                                                    "Auto",
+                                                    secondLanguage.title,
+                                                    text,
+                                                    textTranslated
+                                                )
+                                            }?:run {
+                                                context.toasty("read time out, maybe your internet is slow.. try with a stable internet")
+                                            }
                                         }
                                     } else {
                                         context.toasty("write something to translate it")
@@ -351,27 +354,6 @@ fun HomeScreen(
                         }
                     }
                 }
-//                    }
-//                )
-                /*Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(200.dp)
-                        .padding(horizontal = 15.dp, vertical = 10.dp)
-                        .clip(MaterialTheme.shapes.large)
-                ) {
-                    Image(
-                        painter = painterResource(R.drawable.images),
-                        contentDescription = "home_screen_bg",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
-                Text(
-                    "Home Screen",
-                    style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.padding(vertical = 20.dp)
-                )*/
             }
         }
     }
@@ -382,17 +364,6 @@ private fun mModifiers() = Modifier
     .fillMaxWidth()
     .height(5.dp)
 
-@Composable
-private fun CustomLinearProgressBar() {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        LinearProgressIndicator(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(15.dp)
-        )
-    }
-}
-
 fun insertDataToDatabase(
     dbViewModel: DatabaseViewModel,
     firstLang: String,
@@ -402,7 +373,5 @@ fun insertDataToDatabase(
 ) {
     val history = TranslationHistory(0, firstLang, secondLang, firstText, secondText)
     dbViewModel.insertHistory(history)
-    /*val longValue =  dbViewModel.insertHistory(history)
-      Log.d("testing_insertion", "$longValue")*/
 }
 

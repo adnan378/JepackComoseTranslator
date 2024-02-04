@@ -13,8 +13,4 @@ class MyApp : Application() {
 
         Log.d("testing", "created")
     }
-
-    fun getContext() : Context{
-        return this
-    }
 }
